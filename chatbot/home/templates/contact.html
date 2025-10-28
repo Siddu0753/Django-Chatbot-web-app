@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Contact - Vishal AI Chat{% endblock %}
+
+
+{% block content %}
+<style>
+    form {
+        display: inline-block;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        width: 320px;
+        margin: 20px auto;
+    }
+    input, textarea {
+        display: block;
+        margin: 10px auto;
+        padding: 8px;
+        width: 90%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        padding: 10px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 95%;
+        font-weight: bold;
+    }
+    button:hover {
+        background-color: darkgreen;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #002766;
+    }
+    .success-message {
+        text-align: center;
+        background: #e6ffe6;
+        color: #006400;
+        padding: 10px;
+        border-radius: 8px;
+        width: 350px;
+        margin: 10px auto 20px;
+        font-weight: bold;
+    }
+</style>
+
+
+<h2>Contact Us</h2>
+
+
+{% if message %}
+  <div class="success-message">{{ message }}</div>
+{% endif %}
+
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="text" name="mobile" placeholder="Your Mobile" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="description" placeholder="Your Message" required></textarea>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
+

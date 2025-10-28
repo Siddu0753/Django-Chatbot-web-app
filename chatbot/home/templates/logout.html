@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Logout - Vishal AI Chat{% endblock %}
+
+{% block content %}
+<style>
+    .logout-box {
+        background-color: #f9f9f9;
+        color: #000;
+        text-align: center;
+        padding: 40px;
+        margin: 60px auto;
+        width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .logout-box h2 {
+        color: #002766;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        background-color: #004aad;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #003080;
+    }
+</style>
+
+<div class="logout-box">
+    <h2>You have been logged out</h2>
+    <p>Thank you for visiting Vishal AI Chatbot!</p>
+    <a href="{% url 'login' %}" class="btn">Login Again</a>
+</div>
+{% endblock %}

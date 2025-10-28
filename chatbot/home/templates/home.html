@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Home - Gemini Chat{% endblock %}
+{% block content %}
+  <h2>Welcome</h2>
+  <p>This project demonstrates integrating Google Gemini into a Django app with protected chatbot access.</p>
+  <p><a class="btn" href="{% url 'chatbot' %}">Open Chatbot</a></p>
+{% endblock %}

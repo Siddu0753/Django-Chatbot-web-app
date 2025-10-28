@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Chatbot - Gemini Chat{% endblock %}
+{% block content %}
+  <h2>Talk to Gemini</h2>
+  <form method="post">
+    {% csrf_token %}
+    <textarea name="prompt" rows="5" style="width:100%;" placeholder="Ask Gemini something..."></textarea>
+    <br><button class="btn" type="submit" style="margin-top:12px;">Send</button>
+  </form>
+
+
+  {% if error %}
+    <div class="err" style="padding:12px;margin-top:12px;">{{ error }}</div>
+  {% endif %}
+
+
+  {% if response %}
+    <div style="margin-top:20px;">
+      <h4>Gemini Says:</h4>
+      <div style="background:#f4f4f4;padding:15px;border-radius:8px;white-space:pre-wrap;color:#000;">
+        {{ response }}
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

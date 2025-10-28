@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gemini Chat{% endblock %}</title>
+  <style>
+    /* simplified styles like earlier Cars24 look */
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://img.freepik.com/premium-vector/chatbot-robotic-assistant-online-communication-with-artificial-intelligence-technology-background_618588-1016.jpg?semt=ais_hybrid&w=740&q=80");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0; padding: 0;
+      color: #fff;
+    }
+    header { background:#004aad; padding:15px; text-align:center; font-weight:bold; }
+    nav { background:#002766; padding:10px; text-align:center; }
+    nav a { color:#fff; margin: 0 12px; text-decoration:none; }
+    .hero { text-align:center; padding: 80px 20px; background: rgba(0,0,0,0.4); }
+    .container { width: 85%; margin: 30px auto; background: rgba(255,255,255,0.95); color:#000; padding:25px; border-radius:10px; }
+    footer { background:#222; color:#fff; text-align:center; padding:15px; margin-top:30px; }
+    .btn { background:#ff6600; color:#fff; padding:10px 18px; border-radius:6px; text-decoration:none; display:inline-block; }
+    .message { padding:10px; margin-bottom:10px; border-radius:6px; }
+    .succ { background:#e6ffed; color:#006400; }
+    .err { background:#ffe6e6; color:#8b0000; }
+  </style>
+</head>
+<body>
+  <header>Gemini AI Chatbot</header>
+  <nav>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'contact' %}">Contact</a>
+    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+      <a href="{% url 'chatbot' %}">Chatbot</a>
+      <a href="{% url 'logout' %}">Logout</a>
+    {% comment %} {% else %} {% endcomment %}
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}">Register</a>
+    {% comment %} {% endif %} {% endcomment %}
+  </nav>
+
+
+  <div class="hero">
+    <h1>AI Meets Innovation</h1>
+    <p>Chat with Google's Gemini AI — Instant, intelligent responses.</p>
+  </div>
+
+
+  <div class="container">
+    {% for message in messages %}
+      <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+
+
+    {% block content %}{% endblock %}
+  </div>
+
+
+  <footer>&copy; 2025 Vishal AI Chat. All rights reserved.</footer>
+</body>
+</html>
+
