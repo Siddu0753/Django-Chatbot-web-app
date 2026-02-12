@@ -4,15 +4,15 @@
   <h2>Talk to Gemini</h2>
   <form method="post">
     {% csrf_token %}
-    <textarea name="prompt" rows="5" style="width:100%;" placeholder="Ask Gemini something..."></textarea>
-    <br><button class="btn" type="submit" style="margin-top:12px;">Send</button>
+    <textarea id="prompt-box" name="prompt" rows="5" style="width:100%;" placeholder="Ask Gemini something..."></textarea>
+    <br>
+    <button type="button" id="mic-btn" class="btn" style="margin-top:12px; background-color: #28a745;">🎤 Start Listening</button>
+    <button class="btn" type="submit" style="margin-top:12px;">Send</button>
   </form>
-
 
   {% if error %}
     <div class="err" style="padding:12px;margin-top:12px;">{{ error }}</div>
   {% endif %}
-
 
   {% if response %}
     <div style="margin-top:20px;">
@@ -22,4 +22,39 @@
       </div>
     </div>
   {% endif %}
+
+<script>
+  const micBtn = document.getElementById('mic-btn');
+  const promptBox = document.getElementById('prompt-box');
+
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = function() {
+      micBtn.textContent = '👂 Listening...';
+      micBtn.style.backgroundColor = '#dc3545';
+    };
+
+    recognition.onend = function() {
+      micBtn.textContent = '🎤 Start Listening';
+      micBtn.style.backgroundColor = '#28a745';
+    };
+
+    recognition.onresult = function(event) {
+      const transcript = event.results[0][0].transcript;
+      promptBox.value = transcript;
+    };
+
+    micBtn.addEventListener('click', function() {
+      recognition.start();
+    });
+  } else {
+    micBtn.style.display = 'none';
+    console.log('Web Speech API not supported in this browser.');
+  }
+</script>
 {% endblock %}

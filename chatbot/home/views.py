@@ -1,10 +1,13 @@
+import os
+from dotenv import load_dotenv
 from django.shortcuts import render, redirect
 from home.models import *
 import google.generativeai as genai
 
-key="AIzaSyDFt5nibhprPvZnTdLAqy5WuPgblm3zyRI"
+load_dotenv()
+key = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=key)
-model = genai.GenerativeModel(model_name='gemini-2.0-flash')
+model = genai.GenerativeModel(model_name='gemini-2.5-flash')
 
 
 
